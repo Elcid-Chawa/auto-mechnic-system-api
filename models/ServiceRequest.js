@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 
-const reportSchema = new mongoose.Schema({
+const serviceRequestSchema = new mongoose.Schema({
   vehicleId: { type: mongoose.Schema.Types.ObjectId, ref: "Vehicle" },
   mechanicId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  diagnostics: [{ area: String, issue: String, severity: String }],
-  serviceRequestId: { type: mongoose.Schema.Types.ObjectId, ref: "ServiceRequest" },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  serviceType:{type: String},
+  description: {type: String},
   date: { type: Date, default: Date.now },
   status: { type: String, default: "Pending" },
 });
 
-module.exports = mongoose.model("Report", reportSchema);
+module.exports = mongoose.model("ServiceRequest", serviceRequestSchema);

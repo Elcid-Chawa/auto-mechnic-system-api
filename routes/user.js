@@ -17,4 +17,22 @@ router.get(
   },
 );
 
+router.get("/mehcanics", async (req, res) => {
+  try {
+    const users = await User.find({ role: { $in: ["mechanic", "admin"] } });
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+router.get("/clients", async (req, res) => {
+  try {
+    const users = await User.find({ role: "client" });
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
 module.exports = router;
